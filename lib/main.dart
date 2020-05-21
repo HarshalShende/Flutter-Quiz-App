@@ -26,22 +26,47 @@ class _MyAppState extends State{
   final _questions=const[
       {
         'questionText': 'what\'s your name ?',
-        'answers' :['Bharat','Ram','Gandhari','william'],
+        'answers' :[
+          {'text':'Ram', 'score':10},
+          {'text':'Lakshman','score':9},
+          {'text':'Bharat','score':8},
+          {'text':'Shatrughn','score':7},
+        ],
       },
       {
         'questionText': 'what\'s your city ?',
-        'answers' :['Bhandara','Raipur','Gondia','White house'],
+        'answers' :[
+          {'text':'Nagpur', 'score':10},
+          {'text':'Delhi','score':9},
+          {'text':'Mumbai','score':8},
+          {'text':'Raipur','score':7},
+        ],
       },
       {
         'questionText': 'what\'s your fovorite color ?',
-        'answers' :['Blue','Red','GGreen','White'],
+        'answers' :[
+          {'text':'Orange', 'score':10},
+          {'text':'Blue','score':9},
+          {'text':'White','score':8},
+          {'text':'Green','score':7},
+        ],
       },
     ];
 
 
-var _questionIndex=0;
+  var _questionIndex=0;
+  var _totalScore=0;
 
-  void _answerQuestion(){
+  void _resetQuiz(){
+    setState(() {
+      _questionIndex=0;
+      _totalScore=0;
+    });
+  }
+
+  void _answerQuestion(int score){
+    _totalScore=_totalScore+score;
+
     setState(() {
       _questionIndex=_questionIndex+1;
     });
@@ -68,7 +93,7 @@ var _questionIndex=0;
         questions: _questions,
         )
        : 
-       Result()
+       Result(_totalScore, _resetQuiz)
        ,
     ),
     );
